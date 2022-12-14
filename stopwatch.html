@@ -87,8 +87,8 @@
             let appendMinutes = document.querySelector('#minutes');
             let appendTenths = document.querySelector('#tenths');
             let appendSeconds = document.querySelector('#seconds');
-            let appendDays = document.querySelector('#tenths');
-            let appendWeeks = document.querySelector('#seconds');
+            let appendDays = document.querySelector('#days');
+            let appendWeeks = document.querySelector('#weeks');
             let startBtn = document.querySelector('#start');
             let pauseBtn = document.querySelector('#pause');
             let resetBtn = document.querySelector('#reset');
@@ -120,6 +120,39 @@
                     seconds = 0;
                     appendSeconds.innerHTML = '0' + 0;
                 }
+
+                if (minutes > 9) {
+                    appendSeconds.innerHTML = seconds;
+                }
+
+                if (minutes > 59) {
+                    hours++;
+                    appendHours.innerHTML = '0' + hours;
+                    minutes = 0;
+                    appendMinutes.innerHTML = '0' + 0;
+                }
+
+                if (hours > 9) {
+                    appendMinutes.innerHTML = minutes;
+                }
+
+                if (hours > 23) {
+                    days++;
+                    appendDays.innerHTML = days;
+                    hours = 0;
+                    appendHours.innerHTML = '0' + 0;
+                }
+
+                if (days > 9) {
+                    appendHours.innerHTML = hours;
+                }
+
+                if (days > 6) {
+                    weeks++;
+                    appendWeeks.innerHTML = weeks;
+                    days = 0;
+                    appendDays.innerHTML = '0';
+                }
             };
 
             startBtn.onclick = () => {
@@ -134,13 +167,15 @@
             resetBtn.onclick = () => {
                 clearInterval(Interval);
                 tenths = '00';
-                seconds = '00';
-                minutes = '00';
-                days = '00';
-                weeks = '00';
+                seconds = '55';
+                minutes = '59';
+                hours = '23';
+                days = '6';
+                weeks = '0';
                 appendTenths.innerHTML = tenths;
                 appendSeconds.innerHTML = seconds;
                 appendMinutes.innerHTML = minutes;
+                appendHours.innerHTML = hours;
                 appendDays.innerHTML = days;
                 appendWeeks.innerHTML = weeks;
             };
