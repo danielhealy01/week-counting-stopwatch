@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week Stopwatch</title>
+    <Style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            
+        }
+        body {
+            background-image: url(./raphael-nogueira-espuILpsRUw-unsplash.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            width: 100vw;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        main {
+            width: max-content;
+            height: max-content;
+            background-color: rgba(241, 255, 248, 0.6);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            gap: 0.3rem;
+        }
+        section {
+            text-align: center;
+            margin: 0.5rem 0;
+            color: #494949;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 2rem;
+            color: #F3F3F3;
+            text-align: center;
+        }
+        button {
+            all: unset;
+            padding: 0.3rem;
+            border-radius: 0.5rem;
+            background-color: #F3F3F3;
+            user-select: none;
+        }
+        button:active {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #f8f8f8;
+        }
+        .buttonContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+    </Style>
+    <script>
+        window.onload = () => {
+            let minutes = 0;
+            let seconds = 0;
+            let tenths = 00;
+            let hours = 00;
+            let days = 0;
+            let weeks = 00;
+            let appendHours = document.querySelector('#hours');
+            let appendMinutes = document.querySelector('#minutes');
+            let appendTenths = document.querySelector('#tenths');
+            let appendSeconds = document.querySelector('#seconds');
+            let appendDays = document.querySelector('#tenths');
+            let appendWeeks = document.querySelector('#seconds');
+            let startBtn = document.querySelector('#start');
+            let pauseBtn = document.querySelector('#pause');
+            let resetBtn = document.querySelector('#reset');
+            let Interval;
+
+             const startTimer = () => {
+                tenths++;
+                if (tenths <= 9) {
+                    appendTenths.innerHTML = '0' + tenths;
+                }
+                if (tenths > 9) {
+                    appendTenths.innerHTML = tenths;
+                }
+
+                if (tenths > 99) {
+                    seconds++;
+                    appendSeconds.innerHTML = '0' + seconds;
+                    tenths = 0;
+                    appendTenths.innerHTML = '0' + 0;
+                }
+
+                if (seconds > 9) {
+                    appendSeconds.innerHTML = seconds;
+                }
+
+                if (seconds > 59) {
+                    minutes++;
+                    appendMinutes.innerHTML = '0' + minutes;
+                    seconds = 0;
+                    appendSeconds.innerHTML = '0' + 0;
+                }
+            };
+
+            startBtn.onclick = () => {
+                clearInterval(Interval);
+                Interval = setInterval(startTimer, 10);
+            };
+
+            pauseBtn.onclick = () => {
+                clearInterval(Interval);
+            };
+
+            resetBtn.onclick = () => {
+                clearInterval(Interval);
+                tenths = '00';
+                seconds = '00';
+                minutes = '00';
+                days = '00';
+                weeks = '00';
+                appendTenths.innerHTML = tenths;
+                appendSeconds.innerHTML = seconds;
+                appendMinutes.innerHTML = minutes;
+                appendDays.innerHTML = days;
+                appendWeeks.innerHTML = weeks;
+            };
+        };
+    </script>
+
+</head>
+<body>
+    <main>
+        <h1>Week Stopwatch</h1>
+            <section>
+                <div class="timeContainer">
+                    <span id="hours">00</span>
+                    :
+                    <span id="minutes">00</span>
+                    :
+                    <span id="seconds">00</span>
+                    :
+                    <span id="tenths">00</span>
+                </div>
+                <p>Days: <span id="days">0</span></p>
+                <p>Week: <span id="weeks">0</span></p>
+            </section>
+            <div class="buttonContainer">
+                <button id="start">Start</button>
+                <button id="pause">Pause</button>
+                <button id="reset">Reset</button>
+            </div>
+    </main>
+</body>
+</html>
